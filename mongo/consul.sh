@@ -1,0 +1,1 @@
+consul agent -dev -bind $PRIVATE_IP_ADDRESS -advertise $PRIVATE_IP_ADDRESS -join consul_server -node $NODE -data-dir /data -config-dir /etc/consul.d -enable-script-checks

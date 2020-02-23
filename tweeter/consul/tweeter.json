@@ -1,0 +1,32 @@
+{
+  "service": {
+    "name": "web",
+    "port": 5000,
+    "tags": [
+      "web"
+    ],
+    "check": {
+      "id": "web_app_status",
+      "name": "Web Application Status",
+      "http": "http://127.0.0.1:5000/healthcheck",
+      "interval": "30s",
+      "timeout": "20s",
+      "status": "passing"
+    },
+    "connect": {
+      "sidecar_service": {
+        "proxy": {
+          "upstreams": [{
+             "destination_name": "mongo",
+             "local_bind_port": 9191
+          }],
+          "config": {
+            "disable_tcp_check": false,
+            "handshake_timeout_ms": 1000,
+            "connect_timeout_ms": 1000
+          }
+        }
+      }
+    }
+  }
+}

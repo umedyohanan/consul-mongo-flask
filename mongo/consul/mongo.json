@@ -1,0 +1,28 @@
+{
+  "service": {
+    "name": "mongo",
+    "port": 27017,
+    "tags": [
+      "nosql",
+      "database"
+    ],
+    "check": {
+      "id": "mongo_status",
+      "name": "MongoDB Status",
+      "args": ["mongo", "--eval", "'printjson(rs.status())'"],
+      "interval": "30s",
+      "status": "passing"
+    },
+    "connect": {
+      "sidecar_service": {
+        "proxy": {
+          "config": {
+            "disable_tcp_check": false,
+            "handshake_timeout_ms": 1000,
+            "connect_timeout_ms": 1000
+          }
+        }
+      }
+    }
+  }
+}
